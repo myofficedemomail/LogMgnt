@@ -20,11 +20,13 @@ public class ReportController {
 	@GetMapping("/")
 	public String reportPage(Model model) {
 		model.addAttribute("searchform", new SearchRequest());
+		model.addAttribute("list", null);
 		return "index";
 	}
 	@PostMapping("/Reports")
-	public String reportDetails(@ModelAttribute("searchform") SearchRequest searchform) throws Exception {
+	public String reportDetails(@ModelAttribute("searchform") SearchRequest searchform,Model model) throws Exception {
 		List<InsuranceEntity> listInsuranceEntity=reportService.getReportDtls(searchform);
-		return "ReportDetails";
+		model.addAttribute("list", listInsuranceEntity);
+		return "index";
 	}
 }

@@ -18,9 +18,22 @@ public class ReportServiceImpl implements ReportService {
 	@Override
 	public List<InsuranceEntity> getReportDtls(SearchRequest searchForm) throws Exception {
 		SimpleDateFormat format=new SimpleDateFormat("MM/dd/yyyy");
-		//List<InsuranceEntity> listInsuranceEntity=repo.findAll(Example.of(new InsuranceEntity(searchForm.getPlanName(),searchForm.getPlanStatus(),searchForm.getGender(),format.parse(searchForm.getStartDate()),format.parse(searchForm.getEndDate()))));
-		//return listInsuranceEntity;
-		return null;
+		InsuranceEntity insuranceEntity=new InsuranceEntity();
+		if(!searchForm.getPlanName().equalsIgnoreCase("")) {
+			insuranceEntity.setPlan_name(searchForm.getPlanName());
+		}
+		if(!searchForm.getPlanStatus().equalsIgnoreCase("")) {
+			insuranceEntity.setPlan_status(searchForm.getPlanStatus());
+		}
+		if(!searchForm.getGender().equalsIgnoreCase("")) {
+			insuranceEntity.setGender(searchForm.getGender());
+		}
+		if(!searchForm.getStartDate().equalsIgnoreCase("") && searchForm.getStartDate()!=null)
+			insuranceEntity.setPlan_start_date(format.parse(searchForm.getStartDate()));
+		if(!searchForm.getEndDate().equalsIgnoreCase("") && searchForm.getEndDate()!=null)
+			insuranceEntity.setPlan_end_date(format.parse(searchForm.getEndDate()));
+		List<InsuranceEntity> listInsuranceEntity=repo.findAll(Example.of(insuranceEntity));
+		return listInsuranceEntity;
 	}
 
 }

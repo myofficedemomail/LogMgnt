@@ -9,6 +9,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+
+
+
+
 @Entity
 @Table(name = "CITIZEN_PLANS_INFO")
 public class InsuranceEntity {
@@ -18,7 +22,7 @@ public class InsuranceEntity {
 	@Column(name = "CITIZEN_ID")
 	private Integer citizen_id;
 	@Column(name = "CITIZEN_NAME")
-	private Integer citizen_name;
+	private String citizen_name;
 	@Column(name = "GENDER")
 	private String gender;
 	@Column(name = "PLAN_NAME")
@@ -37,9 +41,10 @@ public class InsuranceEntity {
 	private Date terminated_date;
 	@Column(name = "TERMINATION_REASON")
 	private String termination_reason;
-
-	public Integer getCitizen_id() {
-		return citizen_id;
+	
+	
+	public InsuranceEntity() {
+		super();
 	}
 
 	public InsuranceEntity(String plan_name, String plan_status, String gender, Date plan_start_date,
@@ -52,8 +57,8 @@ public class InsuranceEntity {
 		this.plan_end_date = plan_end_date;
 	}
 
-	public InsuranceEntity(Integer citizen_name, String gender, String plan_name, String plan_status,
-			Date plan_start_date, Date plan_end_date, Integer benefit_amount, String denial_reason,
+	public InsuranceEntity(String plan_name, String plan_status, String gender,
+			Date plan_start_date, Date plan_end_date,String citizen_name,  Integer benefit_amount, String denial_reason,
 			Date terminated_date, String termination_reason) {
 		super();
 		this.citizen_name = citizen_name;
@@ -67,16 +72,20 @@ public class InsuranceEntity {
 		this.terminated_date = terminated_date;
 		this.termination_reason = termination_reason;
 	}
-
+	
+	public Integer getCitizen_id() {
+		return citizen_id;
+	}
+	
 	public void setCitizen_id(Integer citizen_id) {
 		this.citizen_id = citizen_id;
 	}
 
-	public Integer getCitizen_name() {
+	public String getCitizen_name() {
 		return citizen_name;
 	}
 
-	public void setCitizen_name(Integer citizen_name) {
+	public void setCitizen_name(String citizen_name) {
 		this.citizen_name = citizen_name;
 	}
 

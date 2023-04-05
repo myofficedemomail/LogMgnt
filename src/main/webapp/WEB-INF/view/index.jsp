@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,9 +22,9 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
 <style>
-.swal2-popup{
-font-size: 1rem !important;
-/* font-family: Georgia,serif; */
+.swal2-popup {
+	font-size: 1rem !important;
+	/* font-family: Georgia,serif; */
 }
 </style>
 <script>
@@ -32,37 +33,42 @@ font-size: 1rem !important;
 			changeMonth : true,
 			changeYear : true
 		});
-		$("#searchBtn").click(function() {
-			if ($("#planName").val() == "0") {
-			    //Swal.fire("Please Select Plan Name");
-				alert("Please Select Plan Name");
-				$("#planName").focus();
-				return false;
-			}
-			if ($("#planStatus").val() == "0") {
-				alert("Please Select Plan Status");
-				$("#planStatus").focus();
-				return false;
-			}
-			if ($("#gender").val() == "0") {
-				alert("Please Select Gender");
-				$("#gender").focus();
-				return false;
-			}
-			if ($("#startDate").val() == "") {
-				alert("Please Select Start Date");
-				$("#startDate").focus();
-				return false;
-			}
-			if ($("#endDate").val() == "") {
-				alert("Please Select End Date");
-				$("#endDate").focus();
-				return false;
-			}
-			document.searchform.action="Reports";
-			document.searchform.method="POST";
-			document.searchform.submit();
-		});
+		$("#searchBtn").click(
+				function() {
+					if ($("#planName").val() == ""
+							&& $("#planStatus").val() == ""
+							&& $("#gender").val() == ""
+							&& $("#startDate").val() == ""
+							&& $("#endDate").val() == "") {
+						//Swal.fire("Please Select Plan Name");
+						alert("Please Select Any Of the Criteria");
+						$("#planName").focus();
+						return false;
+					}
+					/*if ($("#planStatus").val() == "0") {
+						alert("Please Select Plan Status");
+						$("#planStatus").focus();
+						return false;
+					}
+					if ($("#gender").val() == "0") {
+						alert("Please Select Gender");
+						$("#gender").focus();
+						return false;
+					}
+					if ($("#startDate").val() == "") {
+						alert("Please Select Start Date");
+						$("#startDate").focus();
+						return false;
+					}
+					if ($("#endDate").val() == "") {
+						alert("Please Select End Date");
+						$("#endDate").focus();
+						return false;
+					}*/
+					document.searchform.action = "Reports";
+					document.searchform.method = "POST";
+					document.searchform.submit();
+				});
 		$("#planName").change(function() {
 			if ($("#planName").val() == "0") {
 				alert("Please Select Plan Name");
@@ -114,7 +120,7 @@ font-size: 1rem !important;
 							</div>
 							<div class="input-group">
 								<select class="form-select" name="planName" id="planName">
-									<option value="0" selected>Select Plan Name</option>
+									<option value="" selected>Select Plan Name</option>
 									<option value="Cash">Cash</option>
 									<option value="Food">Food</option>
 									<option value="Medical">Medical</option>
@@ -130,7 +136,7 @@ font-size: 1rem !important;
 							</div>
 							<div class="input-group">
 								<select class="form-select" name="planStatus" id="planStatus">
-									<option value="0" selected>Select Plan Status</option>
+									<option value="" selected>Select Plan Status</option>
 									<option value="Approved">Approved</option>
 									<option value="Denied">Denied</option>
 									<option value="Terminated">Terminated</option>
@@ -145,7 +151,7 @@ font-size: 1rem !important;
 							</div>
 							<div class="input-group">
 								<select class="form-select" name="gender" id="gender">
-									<option value="0" selected>Select Gender</option>
+									<option value="" selected>Select Gender</option>
 									<option value="Male">Male</option>
 									<option value="Female">Female</option>
 								</select>
@@ -186,6 +192,66 @@ font-size: 1rem !important;
 						</div>
 					</div>
 				</div>
+			</div>
+			<div class="p-2 mt-4"
+				style="background-color: #e7e1f0; border: 2px solid #a277e6; border-radius: 8px;">
+				<div class="row">
+					<div class="col-12 table-responsive">
+						<table class="table table-hover text-center">
+							<tr>
+								<th>Certizen Id</th>
+								<th>Certizen Name</th>
+								<th>Gender</th>
+								<th>Benifit Amount</th>
+								<th>Denial Reason</th>
+								<th>Plan Name</th>
+								<th>Plan Status</th>
+								<th>Plan Start Dt.</th>
+								<th>Plan End Dt.</th>
+								<th>Terminated Dt.</th>
+								<th>Termination Reason</th>
+							</tr>
+							<c:forEach items="${list}" var="dtls">
+							<tr>
+										<td>${dtls.citizen_id}</td>
+										<td>${dtls.citizen_name}</td>
+										<td>${dtls.gender}</td>
+										<td>${dtls.benefit_amount}</td>
+										<td>${dtls.denial_reason}</td>
+										<td>${dtls.plan_name}</td>
+										<td>${dtls.plan_status}</td>
+										<td>${dtls.plan_start_date}</td>
+										<td>${dtls.plan_end_date}</td>
+										<td>${dtls.terminated_date}</td>
+										<td>${dtls.termination_reason}</td>
+									</tr>
+									</c:forEach>
+						</table>
+					</div>
+				</div>
+				<%-- <c:if test="${not empty list}">
+					<c:forEach items="${list}" var="dtls">
+						<div class="row">
+							<div class="col-12 table-responsive">
+								<table class="table table-hover">
+									<tr>
+										<td>${dtls.citizen_id}</td>
+										<td>${dtls.citizen_name}</td>
+										<td>${dtls.gender}</td>
+										<td>${dtls.benefit_amount}</td>
+										<td>${dtls.denial_reason}</td>
+										<td>${dtls.plan_name}</td>
+										<td>${dtls.plan_status}</td>
+										<td>${dtls.plan_start_date}</td>
+										<td>${dtls.plan_end_date}</td>
+										<td>${dtls.terminated_date}</td>
+										<td>${dtls.termination_reason}</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</c:forEach>
+				</c:if> --%>
 			</div>
 		</div>
 	</form>
