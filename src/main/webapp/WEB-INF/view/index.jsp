@@ -26,6 +26,11 @@
 	font-size: 1rem !important;
 	/* font-family: Georgia,serif; */
 }
+.table td.fit, 
+.table th.fit {
+    white-space: nowrap;
+    width: 1%;
+}
 </style>
 <script>
 	$(function() {
@@ -109,7 +114,7 @@
 </head>
 <body>
 	<form name="searchform">
-		<div class="container">
+		<div class="container-fluid">
 			<div class="p-2 mt-4"
 				style="background-color: #e7e1f0; border: 2px solid #a277e6; border-radius: 8px;">
 				<div class="row">
@@ -193,11 +198,12 @@
 					</div>
 				</div>
 			</div>
+			<c:if test="${not empty list}">
 			<div class="p-2 mt-4"
 				style="background-color: #e7e1f0; border: 2px solid #a277e6; border-radius: 8px;">
 				<div class="row">
 					<div class="col-12 table-responsive">
-						<table class="table table-hover text-center">
+						<table class="table table-hover table-striped text-center">
 							<tr>
 								<th>Certizen Id</th>
 								<th>Certizen Name</th>
@@ -229,30 +235,13 @@
 						</table>
 					</div>
 				</div>
-				<%-- <c:if test="${not empty list}">
-					<c:forEach items="${list}" var="dtls">
-						<div class="row">
-							<div class="col-12 table-responsive">
-								<table class="table table-hover">
-									<tr>
-										<td>${dtls.citizen_id}</td>
-										<td>${dtls.citizen_name}</td>
-										<td>${dtls.gender}</td>
-										<td>${dtls.benefit_amount}</td>
-										<td>${dtls.denial_reason}</td>
-										<td>${dtls.plan_name}</td>
-										<td>${dtls.plan_status}</td>
-										<td>${dtls.plan_start_date}</td>
-										<td>${dtls.plan_end_date}</td>
-										<td>${dtls.terminated_date}</td>
-										<td>${dtls.termination_reason}</td>
-									</tr>
-								</table>
-							</div>
-						</div>
-					</c:forEach>
-				</c:if> --%>
 			</div>
+			</c:if>
+			<c:if test="${empty list}">
+					<div class="row mt-4">
+					<div class="col-12 text-center text-danger"><img src="./resources/image/nodatafound.jpg"></div>
+					</div>
+			</c:if>
 		</div>
 	</form>
 </body>

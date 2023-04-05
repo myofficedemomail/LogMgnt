@@ -8,6 +8,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 
 
@@ -30,14 +32,17 @@ public class InsuranceEntity {
 	@Column(name = "PLAN_STATUS")
 	private String plan_status;
 	@Column(name = "PLAN_START_DATE")
+	@Temporal(TemporalType.DATE)
 	private Date plan_start_date;
 	@Column(name = "PLAN_END_DATE")
+	@Temporal(TemporalType.DATE)
 	private Date plan_end_date;
 	@Column(name = "BENEFIT_AMOUNT")
 	private Integer benefit_amount;
 	@Column(name = "DENIAL_REASON")
 	private String denial_reason;
 	@Column(name = "TERMINATED_DATE")
+	@Temporal(TemporalType.DATE)
 	private Date terminated_date;
 	@Column(name = "TERMINATION_REASON")
 	private String termination_reason;
