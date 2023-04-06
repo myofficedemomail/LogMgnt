@@ -126,6 +126,11 @@
 			document.searchform.method = "POST";
 			document.searchform.submit();
 		});
+		$("#excelBtn").click(function(){
+			document.searchform.action = "Excel";
+			document.searchform.method = "POST";
+			document.searchform.submit();
+		});
 		$("#planName,#planStatus,#gender,#startDate,#endDate,.datepicker").change(function(){
 			document.searchform.action = "Reports";
 			document.searchform.method = "POST";
