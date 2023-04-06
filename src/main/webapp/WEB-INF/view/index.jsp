@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,10 +35,21 @@
 </style>
 <script>
 	$(function() {
-		$(".datepicker").datepicker({
+		/* $(".datepicker").datepicker({
 			changeMonth : true,
 			changeYear : true
-		});
+		}); */
+		 $(".datepicker").datepicker({
+			 changeMonth : true,
+		     changeYear : true,
+			 showButtonPanel: true,
+		     closeText: 'Clear',
+		     onClose: function (dateText, inst) {
+		         if ($(window.event.srcElement).hasClass('ui-datepicker-close')) {
+		             document.getElementById(this.id).value = '';
+		         }
+		     }
+	    });
 		$("#searchBtn").click(
 				function() {
 					if ($("#planName").val() == ""
@@ -50,49 +62,41 @@
 						$("#planName").focus();
 						return false;
 					}
-					/*if ($("#planStatus").val() == "0") {
-						alert("Please Select Plan Status");
-						$("#planStatus").focus();
-						return false;
-					}
-					if ($("#gender").val() == "0") {
-						alert("Please Select Gender");
-						$("#gender").focus();
-						return false;
-					}
-					if ($("#startDate").val() == "") {
-						alert("Please Select Start Date");
-						$("#startDate").focus();
-						return false;
-					}
-					if ($("#endDate").val() == "") {
-						alert("Please Select End Date");
-						$("#endDate").focus();
-						return false;
-					}*/
 					document.searchform.action = "Reports";
 					document.searchform.method = "POST";
 					document.searchform.submit();
 				});
-		$("#planName").change(function() {
-			if ($("#planName").val() == "0") {
+		/*$("#planName").change(function() {
+			if ($("#planName").val() == "") {
 				alert("Please Select Plan Name");
 				$("#planName").focus();
 				return false;
+			}else{
+				document.searchform.action = "Reports";
+				document.searchform.method = "POST";
+				document.searchform.submit();
 			}
 		});
 		$("#planStatus").change(function() {
-			if ($("#planStatus").val() == "0") {
+			if ($("#planStatus").val() == "") {
 				alert("Please Select Plan Status");
 				$("#planStatus").focus();
 				return false;
+			}else{
+				document.searchform.action = "Reports";
+				document.searchform.method = "POST";
+				document.searchform.submit();
 			}
 		});
 		$("#gender").change(function() {
-			if ($("#gender").val() == "0") {
+			if ($("#gender").val() == "") {
 				alert("Please Select Plan Gender");
 				$("#gender").focus();
 				return false;
+			}else{
+				document.searchform.action = "Reports";
+				document.searchform.method = "POST";
+				document.searchform.submit();
 			}
 		});
 		$("#startDate").change(function() {
@@ -100,6 +104,10 @@
 				alert("Please Select Start Date");
 				$("#startDate").focus();
 				return false;
+			}else{
+				document.searchform.action = "Reports";
+				document.searchform.method = "POST";
+				document.searchform.submit();
 			}
 		});
 		$("#endDate").change(function() {
@@ -107,13 +115,27 @@
 				alert("Please Select End Date");
 				$("#endDate").focus();
 				return false;
+			}else{
+				document.searchform.action = "Reports";
+				document.searchform.method = "POST";
+				document.searchform.submit();
 			}
+		});*/
+		$("#pdfBtn").click(function(){
+			document.searchform.action = "Pdf";
+			document.searchform.method = "POST";
+			document.searchform.submit();
+		});
+		$("#planName,#planStatus,#gender,#startDate,#endDate,.datepicker").change(function(){
+			document.searchform.action = "Reports";
+			document.searchform.method = "POST";
+			document.searchform.submit();
 		});
 	});
 </script>
 </head>
 <body>
-	<form name="searchform">
+	<form:form commandName="searchform" modelAttribute="searchform" name="searchform">
 		<div class="container-fluid">
 			<div class="p-2 mt-4"
 				style="background-color: #e7e1f0; border: 2px solid #a277e6; border-radius: 8px;">
@@ -124,13 +146,13 @@
 								<label class="form-label">Plan Name</label>
 							</div>
 							<div class="input-group">
-								<select class="form-select" name="planName" id="planName">
+								<form:select path="planName" class="form-select" name="planName" id="planName">
 									<option value="" selected>Select Plan Name</option>
-									<option value="Cash">Cash</option>
-									<option value="Food">Food</option>
-									<option value="Medical">Medical</option>
-									<option value="Employment">Employment</option>
-								</select>
+									<form:option value="Cash">Cash</form:option>
+									<form:option value="Food">Food</form:option>
+									<form:option value="Medical">Medical</form:option>
+									<form:option value="Employment">Employment</form:option>
+								</form:select>
 							</div>
 						</div>
 					</div>
@@ -140,12 +162,12 @@
 								<label class="form-label">Plan Status</label>
 							</div>
 							<div class="input-group">
-								<select class="form-select" name="planStatus" id="planStatus">
+								<form:select path="planStatus" class="form-select" name="planStatus" id="planStatus">
 									<option value="" selected>Select Plan Status</option>
-									<option value="Approved">Approved</option>
-									<option value="Denied">Denied</option>
-									<option value="Terminated">Terminated</option>
-								</select>
+									<form:option value="Approved">Approved</form:option>
+									<form:option value="Denied">Denied</form:option>
+									<form:option value="Terminated">Terminated</form:option>
+								</form:select>
 							</div>
 						</div>
 					</div>
@@ -155,11 +177,11 @@
 								<label class="form-label">Gender</label>
 							</div>
 							<div class="input-group">
-								<select class="form-select" name="gender" id="gender">
+								<form:select path="gender" class="form-select" name="gender" id="gender">
 									<option value="" selected>Select Gender</option>
-									<option value="Male">Male</option>
-									<option value="Female">Female</option>
-								</select>
+									<form:option value="Male">Male</form:option>
+									<form:option value="Female">Female</form:option>
+								</form:select>
 							</div>
 						</div>
 					</div>
@@ -171,9 +193,9 @@
 								<label class="form-label">Start Date</label>
 							</div>
 							<div class="input-group">
-								<input class="form-control datepicker" id="startDate"
-									name="startDate" type="text" placeholder="Start Date"
-									readonly="readonly">
+								<form:input path="startDate" class="form-control datepicker" id="startDate"
+									name="startDate" type="text" placeholder="Start Date" onkeydown="return false"
+									readonly="readonly"/>
 							</div>
 						</div>
 					</div>
@@ -183,9 +205,9 @@
 								<label class="form-label">End Date</label>
 							</div>
 							<div class="input-group">
-								<input class="form-control datepicker" id="endDate"
-									name="endDate" type="text" placeholder="End Date"
-									readonly="readonly">
+								<form:input path="endDate" class="form-control datepicker" id="endDate"
+									name="endDate" type="text" placeholder="End Date" onkeydown="return false"
+									readonly="readonly"/>
 							</div>
 						</div>
 					</div>
@@ -201,6 +223,13 @@
 			<c:if test="${not empty list}">
 			<div class="p-2 mt-4"
 				style="background-color: #e7e1f0; border: 2px solid #a277e6; border-radius: 8px;">
+				<div class="row mb-2">
+				<div class="col-10"></div>
+				<div class="col-2">
+				<button type="button" class="btn btn-danger" id="pdfBtn">PDF</button>
+				<button type="button" class="btn btn-danger" id="excelBtn">Excel</button>
+				</div>
+				</div>
 				<div class="row">
 					<div class="col-12 table-responsive">
 						<table class="table table-hover table-striped text-center">
@@ -217,8 +246,8 @@
 								<th>Terminated Dt.</th>
 								<th>Termination Reason</th>
 							</tr>
-							<c:forEach items="${list}" var="dtls">
-							<tr>
+								<c:forEach items="${list}" var="dtls">
+									<tr>
 										<td>${dtls.citizen_id}</td>
 										<td>${dtls.citizen_name}</td>
 										<td>${dtls.gender}</td>
@@ -231,8 +260,8 @@
 										<td>${dtls.terminated_date}</td>
 										<td>${dtls.termination_reason}</td>
 									</tr>
-									</c:forEach>
-						</table>
+								</c:forEach>
+							</table>
 					</div>
 				</div>
 			</div>
@@ -243,6 +272,6 @@
 					</div>
 			</c:if>
 		</div>
-	</form>
+	</form:form>
 </body>
 </html>
