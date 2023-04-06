@@ -72,7 +72,10 @@ public class PdfGeneratorUtil {
 			table.addCell(new Cell().add(new Paragraph(insuranceEntity.getCitizen_name()))); 
 			table.addCell(new Cell().add(new Paragraph(insuranceEntity.getGender()))); 
 			table.addCell(new Cell().add(new Paragraph(insuranceEntity.getBenefit_amount().toString()))); 
-			table.addCell(new Cell().add(new Paragraph(insuranceEntity.getDenial_reason()))); 
+			if(insuranceEntity.getDenial_reason()!=null)
+				table.addCell(new Cell().add(new Paragraph(insuranceEntity.getDenial_reason())));
+			else
+				table.addCell(new Cell().add(new Paragraph("")));
 			table.addCell(new Cell().add(new Paragraph(insuranceEntity.getPlan_name()))); 
 			table.addCell(new Cell().add(new Paragraph(insuranceEntity.getPlan_status())));
 			
@@ -92,7 +95,7 @@ public class PdfGeneratorUtil {
 				table.addCell(new Cell().add(new Paragraph("")));
 			
 			if(insuranceEntity.getTermination_reason()!=null)
-			table.addCell(new Cell().add(new Paragraph(format.format(insuranceEntity.getTermination_reason()))));
+			table.addCell(new Cell().add(new Paragraph(insuranceEntity.getTermination_reason())));
 			else
 				table.addCell(new Cell().add(new Paragraph("")));
 		}
