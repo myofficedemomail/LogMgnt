@@ -52,8 +52,8 @@ public class ExcelGeneratorUtil {
 			rowhead.createCell(9).setCellValue(listInsuranceEntity.get(i-1).getTerminated_date());
 			rowhead.createCell(10).setCellValue(listInsuranceEntity.get(i-1).getTermination_reason());
 		}
-		FileOutputStream fileOut = new FileOutputStream("download.xlsx");  
-		workbook.write(fileOut);  
+//		FileOutputStream fileOut = new FileOutputStream("download.xlsx");  
+//		workbook.write(fileOut);  
 		workbook.write(outputStream);
 		workbook.close();
 		return outputStream.toByteArray();
