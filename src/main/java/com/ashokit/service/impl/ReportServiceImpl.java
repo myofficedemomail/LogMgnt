@@ -8,6 +8,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import com.ashokit.entity.InsuranceEntity;
+import com.ashokit.exception.NoDataFoundException;
 import com.ashokit.form.SearchRequest;
 import com.ashokit.repo.InsuranceRepo;
 import com.ashokit.service.ReportService;
@@ -33,6 +34,9 @@ public class ReportServiceImpl implements ReportService {
 		if(!searchForm.getEndDate().equalsIgnoreCase("") && searchForm.getEndDate()!=null)
 			insuranceEntity.setPlan_end_date(format.parse(searchForm.getEndDate()));
 		List<InsuranceEntity> listInsuranceEntity=repo.findAll(Example.of(insuranceEntity));
+		if(listInsuranceEntity.size()==0) {
+			throw new NoDataFoundException("No Data Found");
+		}
 		return listInsuranceEntity;
 	}
 

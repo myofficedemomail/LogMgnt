@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.ashokit.entity.InsuranceEntity;
 import com.ashokit.repo.InsuranceRepo;
-//@Component
+@Component
 public class DataLoader implements CommandLineRunner {
 	@Autowired
 	private InsuranceRepo repo;

@@ -51,7 +51,7 @@ public class EmailUtils {
 			message.setFrom(new InternetAddress(username));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 			message.setSubject("Citizen Records");
-
+			
 			// 3) create MimeBodyPart object and set your message text
 			BodyPart messageBodyPart1 = new MimeBodyPart();
 			messageBodyPart1.setText("Hello Xxx, \nPlease find below citizen attachment.");
@@ -84,7 +84,7 @@ public class EmailUtils {
 			System.out.println("message sent....");
 		} catch (MessagingException ex) {
 			ex.printStackTrace();
-			throw new Exception("Error in mail sending");
+			throw new Exception("ERROR IN MAIL SENDING");
 		}
 	}
 }

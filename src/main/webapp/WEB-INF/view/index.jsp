@@ -271,11 +271,11 @@
 				</div>
 			</div>
 			</c:if>
-			<c:if test="${empty list}">
+			<%-- <c:if test="${empty list}">
 					<div class="row mt-4">
 					<div class="col-12 text-center text-danger"><img src="./resources/image/nodatafound.jpg"></div>
 					</div>
-			</c:if>
+			</c:if> --%>
 		</div>
 	</form:form>
 </body>
