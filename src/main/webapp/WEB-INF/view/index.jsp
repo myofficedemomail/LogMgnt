@@ -131,62 +131,59 @@
 			document.searchform.method = "POST";
 			document.searchform.submit();
 		});
-		$("#planName,#planStatus,#gender,#startDate,#endDate,.datepicker").change(function(){
+		/* $("#planName,#planStatus,#gender,#startDate,#endDate,.datepicker").change(function(){
 			document.searchform.action = "Reports";
 			document.searchform.method = "POST";
 			document.searchform.submit();
-		});
+		}); */
 	});
 </script>
 </head>
 <body>
-	<form:form commandName="searchform" modelAttribute="searchform" name="searchform">
+	<form name="searchform">
 		<div class="container-fluid">
-			<div class="p-2 mt-4"
-				style="background-color: #e7e1f0; border: 2px solid #a277e6; border-radius: 8px;">
+			<div class="p-2 mt-4 border border-primary"
+				style="background-color:#96bef9;border: 2px solid; border-radius: 8px;">
 				<div class="row">
 					<div class="col-4">
 						<div class="">
 							<div class="input-group">
-								<label class="form-label">Plan Name</label>
+								<label class="form-label">Application Name</label>
 							</div>
 							<div class="input-group">
-								<form:select path="planName" class="form-select" name="planName" id="planName">
-									<option value="" selected>Select Plan Name</option>
-									<form:option value="Cash">Cash</form:option>
-									<form:option value="Food">Food</form:option>
-									<form:option value="Medical">Medical</form:option>
-									<form:option value="Employment">Employment</form:option>
-								</form:select>
+								<select path="planName" class="form-select" name="planName" id="planName">
+									<option value="" selected>Select Application Name</option>
+									<option value="">XYZ</option>
+									<option value="">XYZ</option>
+									<option value="">XYZ</option>
+									<option value="">XYZ</option>
+								</select>
 							</div>
 						</div>
 					</div>
 					<div class="col-4">
 						<div class="">
 							<div class="input-group">
-								<label class="form-label">Plan Status</label>
+								<label class="form-label">IP</label>
 							</div>
 							<div class="input-group">
-								<form:select path="planStatus" class="form-select" name="planStatus" id="planStatus">
+								<select path="planStatus" class="form-select" name="planStatus" id="planStatus">
 									<option value="" selected>Select Plan Status</option>
-									<form:option value="Approved">Approved</form:option>
-									<form:option value="Denied">Denied</form:option>
-									<form:option value="Terminated">Terminated</form:option>
-								</form:select>
+									<option value="">101.23.26.89</option>
+									<option value="">101.23.26.89</option>
+									<option value="">101.23.26.89</option>
+									<option value="">101.23.26.89</option>
+								</select>
 							</div>
 						</div>
 					</div>
 					<div class="col-4">
 						<div class="">
 							<div class="input-group">
-								<label class="form-label">Gender</label>
+								<label class="form-label">Serach Key Word</label>
 							</div>
 							<div class="input-group">
-								<form:select path="gender" class="form-select" name="gender" id="gender">
-									<option value="" selected>Select Gender</option>
-									<form:option value="Male">Male</form:option>
-									<form:option value="Female">Female</form:option>
-								</form:select>
+								<input type="text" class="form-control">
 							</div>
 						</div>
 					</div>
@@ -198,7 +195,7 @@
 								<label class="form-label">Start Date</label>
 							</div>
 							<div class="input-group">
-								<form:input path="startDate" class="form-control datepicker" id="startDate"
+								<input path="startDate" class="form-control datepicker" id="startDate"
 									name="startDate" type="text" placeholder="Start Date" onkeydown="return false"
 									readonly="readonly"/>
 							</div>
@@ -210,7 +207,7 @@
 								<label class="form-label">End Date</label>
 							</div>
 							<div class="input-group">
-								<form:input path="endDate" class="form-control datepicker" id="endDate"
+								<input path="endDate" class="form-control datepicker" id="endDate"
 									name="endDate" type="text" placeholder="End Date" onkeydown="return false"
 									readonly="readonly"/>
 							</div>
@@ -219,13 +216,13 @@
 					<div class="col-4">
 						<div class="">
 							<div class="mt-4">
-								<button type="button" id="searchBtn" class="btn btn-success">Search</button>
+								<button type="button" id="" class="btn btn-success">Search</button>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<c:if test="${not empty list}">
+			<%-- <c:if test="${not empty list}">
 			<div class="p-2 mt-4"
 				style="background-color: #e7e1f0; border: 2px solid #a277e6; border-radius: 8px;">
 				<div class="row mb-2">
@@ -270,13 +267,13 @@
 					</div>
 				</div>
 			</div>
-			</c:if>
+			</c:if> --%>
 			<%-- <c:if test="${empty list}">
 					<div class="row mt-4">
 					<div class="col-12 text-center text-danger"><img src="./resources/image/nodatafound.jpg"></div>
 					</div>
 			</c:if> --%>
 		</div>
-	</form:form>
+	</form>
 </body>
 </html>
