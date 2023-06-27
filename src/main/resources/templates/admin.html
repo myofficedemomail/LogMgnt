@@ -46,7 +46,18 @@
 		         }
 		     }
 	    });
-		$("#searchBtn").click(function() {
+		$("#logout").click(function(){
+			document.searchform.action="/";
+			document.searchform.method="GET";
+			document.searchform.submit();
+		});
+		$("#add").click(function(){
+			document.searchform.action="addServer";
+			document.searchform.method="POST";
+			document.searchform.submit();
+		});
+		$("#searchBtn").click(
+				function() {
 					if ($("#planName").val() == ""
 							&& $("#planStatus").val() == ""
 							&& $("#gender").val() == ""
@@ -61,11 +72,6 @@
 					document.searchform.method = "POST";
 					document.searchform.submit();
 				});
-		$("#logout").click(function(){
-			document.searchform.action="/";
-			document.searchform.method="GET";
-			document.searchform.submit();
-		});
 		/*$("#planName").change(function() {
 			if ($("#planName").val() == "") {
 				alert("Please Select Plan Name");
@@ -145,10 +151,13 @@
 			<div class="p-2 mt-4 border border-primary"
 				style="background-color:#96bef9;border: 2px solid; border-radius: 8px;">
 				<div class="row">
-				  <div class="col-12">
+				  <div class="col-8">
 				     <div class="m-2">
 				         <button class="btn btn-danger" id="logout">Logout</button>
 				     </div>
+				  </div>
+				  <div class="col-4">
+				    <p th:text="${msg}"></p>
 				  </div>
 				</div>
 				<div class="row">
@@ -158,10 +167,14 @@
 								<label class="form-label">Application Name</label>
 							</div>
 							<div class="input-group">
-								<select path="planName" class="form-select" name="servername" id="servername">
+								<!-- <select path="planName" class="form-select" name="planName" id="planName">
 									<option value="" selected>Select Application Name</option>
-									<option th:each="server : ${allServiceDtls}" th:value="${server.servername}" th:text="${server.servername}"></option>
-								</select>
+									<option value="">XYZ</option>
+									<option value="">XYZ</option>
+									<option value="">XYZ</option>
+									<option value="">XYZ</option>
+								</select> -->
+								<input type="text" class="form-control" placeholder="Enter Application Name" name="servername">
 							</div>
 						</div>
 					</div>
@@ -171,14 +184,18 @@
 								<label class="form-label">IP</label>
 							</div>
 							<div class="input-group">
-								<select path="planStatus" class="form-select" name="planStatus" id="planStatus">
+								<!-- <select path="planStatus" class="form-select" name="planStatus" id="planStatus">
 									<option value="" selected>Select IP</option>
-									<option th:each="server : ${allServiceDtls}" th:value="${server.serverip}" th:text="${server.serverip}"></option>
-								</select>
+									<option value="">101.23.26.89</option>
+									<option value="">101.23.26.89</option>
+									<option value="">101.23.26.89</option>
+									<option value="">101.23.26.89</option>
+								</select> -->
+								<input type="text" class="form-control" placeholder="Enter IP Address" name="serverip">
 							</div>
 						</div>
 					</div>
-					<div class="col-4">
+					<!-- <div class="col-4">
 						<div class="">
 							<div class="input-group">
 								<label class="form-label">Serach Key Word</label>
@@ -187,9 +204,16 @@
 								<input type="text" class="form-control">
 							</div>
 						</div>
+					</div> -->
+					<div class="col-4">
+						<div class="">
+							<div class="mt-4">
+								<button type="button" id="add" class="btn btn-success">Add</button>
+							</div>
+						</div>
 					</div>
 				</div>
-				<div class="row">
+				<!-- <div class="row">
 					<div class="col-4">
 						<div class="">
 							<div class="input-group">
@@ -221,7 +245,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</form>

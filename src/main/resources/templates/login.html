@@ -35,7 +35,7 @@
 $(document).ready(function(){
 	$("#login").click(function(){
 		document.login.action="login";
-		document.login.method="GET";
+		document.login.method="POST";
 		document.login.submit();
 	});
 });
@@ -55,7 +55,7 @@ $(document).ready(function(){
 					<form name="login">
 						<!-- Email input -->
 						<div class="form-outline mb-4">
-							<input type="email" id="form3Example3"
+							<input type="email" id="form3Example3" name="username"
 								class="form-control form-control-lg"
 								placeholder="Enter a valid email address" /> <label
 								class="form-label" for="form3Example3">Email address</label>
@@ -63,7 +63,7 @@ $(document).ready(function(){
 
 						<!-- Password input -->
 						<div class="form-outline mb-3">
-							<input type="password" id="form3Example4"
+							<input type="password" id="form3Example4" name="password"
 								class="form-control form-control-lg"
 								placeholder="Enter password" /> <label class="form-label"
 								for="form3Example4">Password</label>
